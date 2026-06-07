@@ -1,4 +1,6 @@
 package immc.liasbetteroffhand.mixin;
+// Heyo! if you're reading this, this is my first go at a Minecraft mod! Sorry about the excessive comments, I needed to keep track of what I was doing. 
+// I did get a bit of help from AI, but it was self hosted on my own machine, so no lakes were boiled in the making of this :)
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
