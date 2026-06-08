@@ -24,6 +24,7 @@ public class OffhandUseMixin {
 	private Item lastMainHandItem = null; // Stores what item was in the main hand last tick
 	private int lastMainHandCount = 0; // Stores how many of that item were in the stack last tick
 	private boolean crossbowLoadedLastTick = false; // Stores whether the crossbow was loaded last tick
+	private boolean mainHandUseItemOnThisTick = false; // Stores whether the main hand has used an item on a block this tick
 
 	// Check if we need to block the offhand this tick
     @Inject(
@@ -32,7 +33,7 @@ public class OffhandUseMixin {
     )
     private void onTick(CallbackInfo ci) {
         Minecraft mc = Minecraft.getInstance(); // Get Minecraft game instance
-        if (mc.player == null) return; // DOn't do anything unless there's a player loaded
+        if (mc.player == null) return; // Don't do anything unless there's a player loaded
 
         Player player = mc.player; // Get reference to the local player
         boolean rightMouseHeld = mc.options.keyUse.isDown(); // Check if the right mouse button, or equivalent keybind, is being held down
@@ -52,7 +53,7 @@ public class OffhandUseMixin {
 		// Is the player currently using an instant use item such as a firework, snowball, egg, ender pearl, etc?
 		// And was there something in their main hand last tick?
 		// And has either the item in the main hand changes, or the stack gotten smaller?
-		// True if all three are satisified.
+		// True if all three are satisfied.
 		// Essentially, has the player used an instant use item and not let go of their right mouse button?
 		boolean instantUseDetected = rightMouseHeld
 			&& lastMainHandItem != null
@@ -88,41 +89,81 @@ public class OffhandUseMixin {
 		}
 
 		crossbowLoadedLastTick = currentCrossbowLoaded; // Save this tick's crossbow state
+
+		mainHandUseItemOnThisTick = false; // Reset to false every tick since we determine whether it's true or not each tick, and should assume false until checked.
     }
 
-	// Tell Minecraft we need to block the offhand while consuming if necessary
+	// +----------------------------------------------+
+
+	// When the main hand uses an item on a block, check the result and determine whether the main hand was used on a block
+	@Inject(
+		method = "useItemOn",
+		at = @At("TAIL")
+	)
+	private void checkMainHandUseItemOn(
+		LocalPlayer player,
+		InteractionHand hand,
+		BlockHitResult hitResult,
+		CallbackInfoReturnable<InteractionResult> cir
+	) {
+		if (hand != InteractionHand.MAIN_HAND) return;
+
+		//System.out.println("Main hand result: " + cir.getReturnValue());
+		//System.out.println("Main hand useItemOn TAIL fired");
+
+		InteractionResult result = cir.getReturnValue(); // Grab the interaction result
+
+		// If the item was succesfully used on the block, block the offhand
+		if (result != null && (result == InteractionResult.SUCCESS
+				|| result == InteractionResult.CONSUME)) { 
+			mainHandUseItemOnThisTick = true;
+		}
+		// Completely disable offhand if the item used was bone meal
+		// Since bone meal success is handeled server side, the client will try and trigger the offhand in the same tick
+		// So this check disables the offhand regardless of if the bone meal was actually used or not
+		if (player.getMainHandItem().is(net.minecraft.world.item.Items.BONE_MEAL)) {
+			mainHandUseItemOnThisTick = true;
+		}
+	}
+
+	// Tell Minecraft we need to block the offhand while the main hand is using an item, if necessary
     @Inject(
         method = "useItem",
         at = @At("HEAD"),
         cancellable = true
     )
-    private void preventOffhandWhileConsuming(
+    private void preventOffhandUseItem(
         Player player,
         InteractionHand hand,
         CallbackInfoReturnable<InteractionResult> cir
     ) {
         if (hand != InteractionHand.OFF_HAND) return; // If the hand that triggered this isn't the offhand, don't cancel.
 
-        if (blockOffhandUse) { // If we need to block the offhand, pass this to Minecraft
-            cir.setReturnValue(InteractionResult.PASS);
-        }
+		//System.out.println("Offhand useItem HEAD fired, blockOffhandUse: " + blockOffhandUse);
+
+        if (blockOffhandUse || mainHandUseItemOnThisTick) { // If we need to block the offhand, pass this to Minecraft
+			cir.setReturnValue(InteractionResult.PASS);
+		}
     }
 
-	// Tell Minecraft we need to block the offhand while using the main hand if necessary
+	// Block the offhand from using an item on a block if the flag is set
 	@Inject(
 		method = "useItemOn",
 		at = @At("HEAD"),
 		cancellable = true
 	)
-	private void preventOffhandBlockUseWhileUsingMainHand(
+	private void preventOffhandUseItemOn(
 		LocalPlayer player,
 		InteractionHand hand,
 		BlockHitResult hitResult,
 		CallbackInfoReturnable<InteractionResult> cir
 	) {
-		if (hand != InteractionHand.OFF_HAND) return; // If the hand that triggered this isn't the offhand, don't cancel.
+		if (hand != InteractionHand.OFF_HAND) return;
 
-		if (blockOffhandUse) { // If we need to block the offhand, pass this to Minecraft
+		//System.out.println("Offhand useItemOn HEAD fired, mainHandUsedOnBlock: " + mainHandUseItemOnThisTick);
+		//System.out.println("Offhand block check - blockOffhandUse: " + blockOffhandUse + " | mainHandUsedOnBlock: " + mainHandUseItemOnThisTick);
+
+		if (blockOffhandUse || mainHandUseItemOnThisTick) { // If we need to block the offhand, pass this to Minecraft
 			cir.setReturnValue(InteractionResult.PASS);
 		}
 	}
