@@ -1,3 +1,6 @@
+[![Fabric API](https://img.shields.io/badge/Fabric%20API-required-orange)](https://modrinth.com/mod/fabric-api)
+[![Cloth Config](https://img.shields.io/badge/Cloth%20Config-required-orange)](https://modrinth.com/mod/cloth-config)
+[![Mod Menu](https://img.shields.io/badge/Mod%20Menu-optional-blue)](https://modrinth.com/mod/modmenu)
 # Lia's Better Offhand
 A client-side Fabric mod for Minecraft 26.1.2 that prevents accidental offhand item activation while using your main hand.
 
@@ -19,9 +22,12 @@ Known limitations:
 - Instant use items detection (e.g. throwing the last snowball in a stack) rely on the stack size changing, or specific item names and types. If a mod adds an instant-use item that doesn't reduce stack size, or isn't in the type list, it may not be caught.
 
 ## Dependencies
-[![Fabric API](https://img.shields.io/badge/Fabric%20API-required-orange)](https://modrinth.com/mod/fabric-api)
-[![Cloth Config](https://img.shields.io/badge/Cloth%20Config-required-orange)](https://modrinth.com/mod/cloth-config)
-[![Mod Menu](https://img.shields.io/badge/Mod%20Menu-optional-blue)](https://modrinth.com/mod/modmenu)
+This mod requires:
+- [Fabric API](https://modrinth.com/mod/fabric-api)
+- [Cloth Config](https://modrinth.com/mod/cloth-config)
+
+Recommended, but not required:
+- [Mod Menu](https://modrinth.com/mod/modmenu)
 
 ## About
 This is the first Minecraft mod I've ever made, which was initially just for personal use on the [Immortal MC server](https://www.immortalmc.net/) where we have a fully generated [voxy](https://modrinth.com/mod/voxy) file that I love using the spyglass with (in my offhand). If you're looking for a small, tight-knit, vanilla survival (with a couple pluigns) come check us out!
