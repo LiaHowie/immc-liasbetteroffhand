@@ -20,5 +20,6 @@ public class LiasBetterOffhand implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("Lia's Better Offhand loaded!");
+		ModConfig.register();
 	}
 }

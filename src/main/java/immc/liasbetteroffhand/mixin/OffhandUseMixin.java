@@ -17,15 +17,31 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import immc.liasbetteroffhand.ModConfig;
+
 @Mixin(net.minecraft.client.multiplayer.MultiPlayerGameMode.class)
 public class OffhandUseMixin {
-
     private boolean blockOffhandUse = false; // Tracks whether the offhand should be blocked or not
 	private Item lastMainHandItem = null; // Stores what item was in the main hand last tick
 	private int lastMainHandCount = 0; // Stores how many of that item were in the stack last tick
 	private boolean crossbowLoadedLastTick = false; // Stores whether the crossbow was loaded last tick
 	private boolean mainHandUseItemOnThisTick = false; // Stores whether the main hand has used an item on a block this tick
 	private boolean mainHandEntityInterThisTick = false; // Stores whether the main hand has interacted with an entity this tick
+
+	private void debugMsg(String message) { // Debug message output
+		if (ModConfig.get().debugMode) {
+			System.out.println("[LiasBetterOffhand] " + message);
+			Minecraft mc = Minecraft.getInstance();
+			if (mc.player != null) {
+				mc.player.sendSystemMessage(
+					net.minecraft.network.chat.Component.literal("[LiasBetterOffhand] ")
+						.withStyle(net.minecraft.ChatFormatting.LIGHT_PURPLE)
+						.append(net.minecraft.network.chat.Component.literal(message)
+							.withStyle(net.minecraft.ChatFormatting.WHITE))
+				);
+			}
+		}
+	}
 
 	// Check if we need to block the offhand this tick
     @Inject(
@@ -111,8 +127,8 @@ public class OffhandUseMixin {
 	) {
 		if (hand != InteractionHand.MAIN_HAND) return;
 
-		//System.out.println("Main hand useItemOn TAIL fired, item: " + player.getMainHandItem().getItem());
-		//System.out.println("Main hand result: " + cir.getReturnValue());
+		debugMsg("Main hand useItemOn TAIL fired, item: " + player.getMainHandItem().getItem());
+		debugMsg("Main hand result: " + cir.getReturnValue());
 
 		InteractionResult result = cir.getReturnValue(); // Grab the interaction result
 
@@ -168,15 +184,15 @@ public class OffhandUseMixin {
 
 		InteractionResult result = cir.getReturnValue(); // Grab the interaction result
 		
-		//System.out.println("Entity interact TAIL fired with hand: " + hand);
-		//System.out.println("Entity interact result: " + result);
+		debugMsg("Entity interact TAIL fired with hand: " + hand);
+		debugMsg("Entity interact result: " + result);
 
 		// If the interaction was succesful and had an outcome, block the offhand
 		if (result != null && result.consumesAction()) {
 			mainHandEntityInterThisTick = true;
 			blockOffhandUse = true;
 
-			//System.out.println("mainHandEntityInterThisTick set to true");
+			debugMsg("mainHandEntityInterThisTick set to true");
 		}
 	}
 
@@ -195,7 +211,7 @@ public class OffhandUseMixin {
     ) {
         if (hand != InteractionHand.OFF_HAND) return; // If the hand that triggered this isn't the offhand, don't cancel.
 
-		//System.out.println("Offhand useItem HEAD fired, blockOffhandUse: " + blockOffhandUse);
+		debugMsg("Offhand useItem HEAD fired, blockOffhandUse: " + blockOffhandUse);
 
         if (blockOffhandUse || mainHandUseItemOnThisTick || mainHandEntityInterThisTick) { // If we need to block the offhand, pass this to Minecraft
 			cir.setReturnValue(InteractionResult.PASS);
@@ -216,8 +232,8 @@ public class OffhandUseMixin {
 	) {
 		if (hand != InteractionHand.OFF_HAND) return;
 
-		//System.out.println("Offhand useItemOn HEAD fired, mainHandUsedOnBlock: " + mainHandUseItemOnThisTick);
-		//System.out.println("Offhand block check - blockOffhandUse: " + blockOffhandUse + " | mainHandUsedOnBlock: " + mainHandUseItemOnThisTick);
+		debugMsg("Offhand useItemOn HEAD fired, mainHandUsedOnBlock: " + mainHandUseItemOnThisTick);
+		debugMsg("Offhand block check - blockOffhandUse: " + blockOffhandUse + " | mainHandUsedOnBlock: " + mainHandUseItemOnThisTick);
 
 		if (blockOffhandUse || mainHandUseItemOnThisTick || mainHandEntityInterThisTick) { // If we need to block the offhand, pass this to Minecraft
 			cir.setReturnValue(InteractionResult.PASS);

@@ -17,6 +17,9 @@
 	"entrypoints": {
 		"main": [
 			"immc.liasbetteroffhand.LiasBetterOffhand"
+		],
+		"modmenu": [
+			"immc.liasbetteroffhand.ModMenuIntegration"
 		]
 	},
 	"mixins": [
@@ -26,6 +29,10 @@
 		"fabricloader": ">=0.19.3",
 		"minecraft": "~26.1.2",
 		"java": ">=25",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"cloth-config": ">=26.1.154"
+	},
+	"suggests": {
+		"modmenu": "*"
 	}
 }
