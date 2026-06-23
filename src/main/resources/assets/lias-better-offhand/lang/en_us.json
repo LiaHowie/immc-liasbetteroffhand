@@ -1,4 +1,7 @@
 {
     "text.autoconfig.lias-better-offhand.title": "Lia's Better Offhand",
-    "text.autoconfig.lias-better-offhand.option.debugMode": "Debug Mode"
+    "text.autoconfig.lias-better-offhand.option.noOffhandLightPlacement": "No Offhand Light Placement",
+	"text.autoconfig.lias-better-offhand.option.noOffhandLightPlacement.@Tooltip": "Prevents the placement of torches, lanterns,\nand other light-emitting items from your offhand",
+    "text.autoconfig.lias-better-offhand.option.debugMode": "Debug Mode",
+	"text.autoconfig.lias-better-offhand.option.debugMode.@Tooltip": "Shows debugging info"
 }
