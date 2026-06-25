@@ -31,10 +31,10 @@ public class OffhandUseMixin {
 	private int tickCount = 0; // Stores the current tick within the current second
 
 	private void debugMsg(String message) { // Debug message output
-		if (ModConfig.get().debugMode) {
+		if (ModConfig.get().debugMode.enabled) {
 			Minecraft mc = Minecraft.getInstance();
 			System.out.println("[LiasBetterOffhand] | " + tickCount + " | " + message);
-			if (mc.player != null) {
+			if (ModConfig.get().debugMode.inGameMessages && mc.player != null) {
 				mc.player.sendSystemMessage(
 					net.minecraft.network.chat.Component.literal("[LiasBetterOffhand] ")
 						.withStyle(net.minecraft.ChatFormatting.LIGHT_PURPLE)

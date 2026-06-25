@@ -3,5 +3,8 @@
     "text.autoconfig.lias-better-offhand.option.noOffhandLightPlacement": "No Offhand Light Placement",
 	"text.autoconfig.lias-better-offhand.option.noOffhandLightPlacement.@Tooltip": "Prevents the placement of torches, lanterns,\nand other light-emitting items from your offhand",
     "text.autoconfig.lias-better-offhand.option.debugMode": "Debug Mode",
-	"text.autoconfig.lias-better-offhand.option.debugMode.@Tooltip": "Shows debugging info"
+    "text.autoconfig.lias-better-offhand.option.debugMode.enabled": "Enable Debug Mode",
+	"text.autoconfig.lias-better-offhand.option.debugMode.enabled.@Tooltip": "Enables debugging info within the game logs",
+    "text.autoconfig.lias-better-offhand.option.debugMode.inGameMessages": "Show Debug Messages In Game",
+	"text.autoconfig.lias-better-offhand.option.debugMode.inGameMessages.@Tooltip": "Shows debugging info within chat.\nRequires Debug Mode to be enabled"
 }

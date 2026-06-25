@@ -13,8 +13,16 @@ public class ModConfig implements ConfigData {
 	@ConfigEntry.Gui.Tooltip()
     public boolean noOffhandLightPlacement = false;
 
-	@ConfigEntry.Gui.Tooltip()
-    public boolean debugMode = false;
+    @ConfigEntry.Gui.CollapsibleObject
+    public DebugConfig debugMode = new DebugConfig();
+    public static class DebugConfig implements ConfigData {
+        @ConfigEntry.Gui.Tooltip()
+        public boolean enabled = false;
+
+        @ConfigEntry.Gui.Tooltip()
+        public boolean inGameMessages = false;
+
+    }
 
     public static ModConfig get() {
         return AutoConfig.getConfigHolder(ModConfig.class).getConfig();
