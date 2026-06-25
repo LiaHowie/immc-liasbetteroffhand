@@ -8,6 +8,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.phys.BlockHitResult;
@@ -41,6 +42,12 @@ public class OffhandUseMixin {
 				);
 			}
 		}
+	}
+
+	private boolean isLightEmittingBlockItem(ItemStack itemStack) {
+		if (itemStack.isEmpty()) return false;
+		if (!(itemStack.getItem() instanceof BlockItem blockItem)) return false;
+		return blockItem.getBlock().defaultBlockState().getLightEmission() > 0;
 	}
 
 	// Check if we need to block the offhand this tick
@@ -213,7 +220,7 @@ public class OffhandUseMixin {
 
 		debugMsg("Offhand useItem HEAD fired, blockOffhandUse: " + blockOffhandUse);
 
-        if (blockOffhandUse || mainHandUseItemOnThisTick || mainHandEntityInterThisTick) { // If we need to block the offhand, pass this to Minecraft
+		if (blockOffhandUse || mainHandUseItemOnThisTick || mainHandEntityInterThisTick) { // If we need to block the offhand, pass this to Minecraft
 			cir.setReturnValue(InteractionResult.PASS);
 		}
     }
@@ -235,7 +242,10 @@ public class OffhandUseMixin {
 		debugMsg("Offhand useItemOn HEAD fired, mainHandUsedOnBlock: " + mainHandUseItemOnThisTick);
 		debugMsg("Offhand block check - blockOffhandUse: " + blockOffhandUse + " | mainHandUsedOnBlock: " + mainHandUseItemOnThisTick);
 
-		if (blockOffhandUse || mainHandUseItemOnThisTick || mainHandEntityInterThisTick) { // If we need to block the offhand, pass this to Minecraft
+		// If we need to block the offhand, pass this to Minecraft
+		if (ModConfig.get().noOffhandLightPlacement && isLightEmittingBlockItem(player.getOffhandItem())) {
+			cir.setReturnValue(InteractionResult.FAIL);
+		} else if (blockOffhandUse || mainHandUseItemOnThisTick || mainHandEntityInterThisTick) {
 			cir.setReturnValue(InteractionResult.PASS);
 		}
 	}
