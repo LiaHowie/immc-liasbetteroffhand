@@ -1,4 +1,4 @@
-# Lia's Better Offhand [![Fabric API](https://img.shields.io/badge/Fabric%20API-required-orange?style=for-the-badge)](https://modrinth.com/mod/fabric-api) [![Cloth Config](https://img.shields.io/badge/Cloth%20Config-required-orange?style=for-the-badge)](https://modrinth.com/mod/cloth-config) [![Mod Menu](https://img.shields.io/badge/Mod%20Menu-optional-blue?style=for-the-badge)](https://modrinth.com/mod/modmenu)
+# Lia's Better Offhand [![Fabric API](https://img.shields.io/badge/Fabric%20API-required-orange?style=flat-square)](https://modrinth.com/mod/fabric-api) [![Cloth Config](https://img.shields.io/badge/Cloth%20Config-required-orange?style=flat-square)](https://modrinth.com/mod/cloth-config) [![Mod Menu](https://img.shields.io/badge/Mod%20Menu-optional-blue?style=flat-square)](https://modrinth.com/mod/modmenu)
 A client-side Fabric mod that prevents accidental offhand item activation while using your main hand.
 
 ## What it does
@@ -39,7 +39,7 @@ Contributions are more than welcome! Please make this better! If you find anythi
 
 ### Current Contributions
 **[nco2k](https://github.com/nco2k):** 
-[![v1.2.0](https://img.shields.io/badge/v1.2.0-grey?style=for-the-badge&logo=github)](https://github.com/LiaHowie/immc-liasbetteroffhand/releases/tag/1.2.0) Added the no offhand light placement optional feature 
-[![v1.2.0](https://img.shields.io/badge/v1.2.0-grey?style=for-the-badge&logo=github)](https://github.com/LiaHowie/immc-liasbetteroffhand/releases/tag/1.2.0) Introduced config setting tooltips
-[![v1.2.0](https://img.shields.io/badge/v1.2.0-grey?style=for-the-badge&logo=github)](https://github.com/LiaHowie/immc-liasbetteroffhand/releases/tag/1.2.0) Broadened version compatibility to both 26.1.* and 26.2.*
+- [![v1.2.0](https://img.shields.io/badge/v1.2.0-grey?style=flat-square&logo=github)](https://github.com/LiaHowie/immc-liasbetteroffhand/releases/tag/1.2.0) Added the no offhand light placement optional feature 
+- [![v1.2.0](https://img.shields.io/badge/v1.2.0-grey?style=flat-square&logo=github)](https://github.com/LiaHowie/immc-liasbetteroffhand/releases/tag/1.2.0) Introduced config setting tooltips
+- [![v1.2.0](https://img.shields.io/badge/v1.2.0-grey?style=flat-square&logo=github)](https://github.com/LiaHowie/immc-liasbetteroffhand/releases/tag/1.2.0) Broadened version compatibility to both 26.1.* and 26.2.*
 
