@@ -1,7 +1,4 @@
-[![Fabric API](https://img.shields.io/badge/Fabric%20API-required-orange)](https://modrinth.com/mod/fabric-api)
-[![Cloth Config](https://img.shields.io/badge/Cloth%20Config-required-orange)](https://modrinth.com/mod/cloth-config)
-[![Mod Menu](https://img.shields.io/badge/Mod%20Menu-optional-blue)](https://modrinth.com/mod/modmenu)
-# Lia's Better Offhand
+# Lia's Better Offhand [![Fabric API](https://img.shields.io/badge/Fabric%20API-required-orange?style=for-the-badge)](https://modrinth.com/mod/fabric-api) [![Cloth Config](https://img.shields.io/badge/Cloth%20Config-required-orange?style=for-the-badge)](https://modrinth.com/mod/cloth-config) [![Mod Menu](https://img.shields.io/badge/Mod%20Menu-optional-blue?style=for-the-badge)](https://modrinth.com/mod/modmenu)
 A client-side Fabric mod that prevents accidental offhand item activation while using your main hand.
 
 ## What it does
@@ -17,6 +14,9 @@ This applies to:
 - **Tools and utility items used on blocks:** axes (stripping/scraping/dewaxing), shovels, hoes, bonemeal, shears, flint and steel
 - **Leads:** attaching to fence posts, picking up from fence posts, attaching to animals, removing from animals
 - **Entity interactions:** shearing sheep, applying/removing saddles, any other successful entity interaction
+
+Optional features:
+- **No Offhand Light Placement:** disables the placement of light-emitting items in your offhand, such as torches, lanterns, etc.
 
 Known limitations:
 - Instant use items detection (e.g. throwing the last snowball in a stack) rely on the stack size changing, or specific item names and types. If a mod adds an instant-use item that doesn't reduce stack size, or isn't in the type list, it may not be caught.
@@ -36,3 +36,10 @@ For full disclosure, a self-hosted AI model was used to assist in developing thi
 
 ## Contributing
 Contributions are more than welcome! Please make this better! If you find anything that could be improved, whether that be a bug or a new feature, feel free to open an issue or submit a pull request. I'm sure I've probably missed some edge cases. If I'm unable to maintain this mod for newer versions of Minecraft, I'm happy for anyone to fork and continue it, just make sure to follow the GPL-3.0 licence 🏳️‍🌈🏳️‍⚧️
+
+### Current Contributions
+**[nco2k](https://github.com/nco2k):** 
+[![v1.2.0](https://img.shields.io/badge/v1.2.0-grey?style=for-the-badge&logo=github)](https://github.com/LiaHowie/immc-liasbetteroffhand/releases/tag/1.2.0) Added the no offhand light placement optional feature 
+[![v1.2.0](https://img.shields.io/badge/v1.2.0-grey?style=for-the-badge&logo=github)](https://github.com/LiaHowie/immc-liasbetteroffhand/releases/tag/1.2.0) Introduced config setting tooltips
+[![v1.2.0](https://img.shields.io/badge/v1.2.0-grey?style=for-the-badge&logo=github)](https://github.com/LiaHowie/immc-liasbetteroffhand/releases/tag/1.2.0) Broadened version compatibility to both 26.1.* and 26.2.*
+
