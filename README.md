@@ -2,7 +2,7 @@
 [![Cloth Config](https://img.shields.io/badge/Cloth%20Config-required-orange)](https://modrinth.com/mod/cloth-config)
 [![Mod Menu](https://img.shields.io/badge/Mod%20Menu-optional-blue)](https://modrinth.com/mod/modmenu)
 # Lia's Better Offhand
-A client-side Fabric mod for Minecraft 26.1.2 that prevents accidental offhand item activation while using your main hand.
+A client-side Fabric mod that prevents accidental offhand item activation while using your main hand.
 
 ## What it does
 Ever been eating food and then suddenly half a stack of fireworks has hit the cieling? Or suddenly zoomed in with your spyglass? Or perhaps you were throwing snowballs at a friend and didn't appreciate throwing your shield up when you ran out?
@@ -10,7 +10,7 @@ Ever been eating food and then suddenly half a stack of fireworks has hit the ci
 In vanilla, if you hold right click to use an item in your main hand, like eating food, the offhand item will activate as soon as the main hand action completes, even if you're still holding the button down. This mod blocks the offhand from activating until you release and re-press right click.
 
 This applies to:
-- **Hold right click items:** food, potions, bows, crossbows, shields, spyglass, trident, spear, goat horn, and any other item with a use animation
+- **Hold right click items:** food, potions, crossbows, goat horn, and any other item with a use animation
 - **Instant use stackables:** snowballs, eggs, ender pearls, splash potions, fireworks, and any other item that consumes from a stack on use
 - **Items breaking while used**
 - **Crossbow firing**
