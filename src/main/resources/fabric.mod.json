@@ -5,11 +5,12 @@
 	"name": "Lia's Better Offhand",
 	"description": "Disables offhand item use while using an item in the main hand.",
 	"authors": [
-		"Lia Howie"
+		"Lia H"
 	],
 	"contact": {
 		"homepage": "https://www.immortalmc.net/",
-		"sources": "https://github.com/LiaHowie/immc-liasbetteroffhand"
+		"sources": "https://github.com/LiaHowie/immc-liasbetteroffhand",
+		"issues": "https://github.com/LiaHowie/immc-liasbetteroffhand/issues"
 	},
 	"license": "GPL-3.0-or-later",
 	"icon": "assets/lias-better-offhand/icon.png",
