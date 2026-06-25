@@ -28,15 +28,18 @@ public class OffhandUseMixin {
 	private boolean crossbowLoadedLastTick = false; // Stores whether the crossbow was loaded last tick
 	private boolean mainHandUseItemOnThisTick = false; // Stores whether the main hand has used an item on a block this tick
 	private boolean mainHandEntityInterThisTick = false; // Stores whether the main hand has interacted with an entity this tick
+	private int tickCount = 0; // Stores the current tick within the current second
 
 	private void debugMsg(String message) { // Debug message output
 		if (ModConfig.get().debugMode) {
-			System.out.println("[LiasBetterOffhand] " + message);
 			Minecraft mc = Minecraft.getInstance();
+			System.out.println("[LiasBetterOffhand] | " + tickCount + " | " + message);
 			if (mc.player != null) {
 				mc.player.sendSystemMessage(
 					net.minecraft.network.chat.Component.literal("[LiasBetterOffhand] ")
 						.withStyle(net.minecraft.ChatFormatting.LIGHT_PURPLE)
+						.append(net.minecraft.network.chat.Component.literal("| " + tickCount + " | ")
+							.withStyle(net.minecraft.ChatFormatting.GRAY))
 						.append(net.minecraft.network.chat.Component.literal(message)
 							.withStyle(net.minecraft.ChatFormatting.WHITE))
 				);
@@ -44,10 +47,10 @@ public class OffhandUseMixin {
 		}
 	}
 
-	private boolean isLightEmittingBlockItem(ItemStack itemStack) {
-		if (itemStack.isEmpty()) return false;
-		if (!(itemStack.getItem() instanceof BlockItem blockItem)) return false;
-		return blockItem.getBlock().defaultBlockState().getLightEmission() > 0;
+	private boolean isLightEmittingBlockItem(ItemStack itemStack) { // Check whether the current item in offhand is light emitting
+		if (itemStack.isEmpty()) return false; // If the offhand is return false immediately
+		if (!(itemStack.getItem() instanceof BlockItem blockItem)) return false; // If the item in the offhand isn't a block item return false immediately
+		return blockItem.getBlock().defaultBlockState().getLightEmission() > 0; // Return True if the block item is light emitting
 	}
 
 	// Check if we need to block the offhand this tick
@@ -56,6 +59,8 @@ public class OffhandUseMixin {
         at = @At("HEAD")
     )
     private void onTick(CallbackInfo ci) {
+		tickCount = (tickCount + 1) % 20; // Increment this second's tick count, capping it at 20 to roll over to the next second
+
         Minecraft mc = Minecraft.getInstance(); // Get Minecraft game instance
         if (mc.player == null) return; // Don't do anything unless there's a player loaded
 
@@ -134,8 +139,7 @@ public class OffhandUseMixin {
 	) {
 		if (hand != InteractionHand.MAIN_HAND) return;
 
-		debugMsg("Main hand useItemOn TAIL fired, item: " + player.getMainHandItem().getItem());
-		debugMsg("Main hand result: " + cir.getReturnValue());
+		debugMsg("Main hand useItemOn TAIL fired, item: " + player.getMainHandItem().getItem() + ", result: " + cir.getReturnValue());
 
 		InteractionResult result = cir.getReturnValue(); // Grab the interaction result
 
@@ -191,8 +195,7 @@ public class OffhandUseMixin {
 
 		InteractionResult result = cir.getReturnValue(); // Grab the interaction result
 		
-		debugMsg("Entity interact TAIL fired with hand: " + hand);
-		debugMsg("Entity interact result: " + result);
+		debugMsg("Main hand useItemOn TAIL fired with hand: " + hand + ", result: " + result);
 
 		// If the interaction was succesful and had an outcome, block the offhand
 		if (result != null && result.consumesAction()) {
@@ -239,12 +242,12 @@ public class OffhandUseMixin {
 	) {
 		if (hand != InteractionHand.OFF_HAND) return;
 
-		debugMsg("Offhand useItemOn HEAD fired, mainHandUsedOnBlock: " + mainHandUseItemOnThisTick);
-		debugMsg("Offhand block check - blockOffhandUse: " + blockOffhandUse + " | mainHandUsedOnBlock: " + mainHandUseItemOnThisTick);
+		debugMsg("Offhand useItemOn HEAD fired, mainHandUsedOnBlock: " + mainHandUseItemOnThisTick + ", blockOffhandUse: " + blockOffhandUse);
 
 		// If we need to block the offhand, pass this to Minecraft
 		if (ModConfig.get().noOffhandLightPlacement && isLightEmittingBlockItem(player.getOffhandItem())) {
 			cir.setReturnValue(InteractionResult.FAIL);
+			debugMsg("Offhand Light Placement Blocked");
 		} else if (blockOffhandUse || mainHandUseItemOnThisTick || mainHandEntityInterThisTick) {
 			cir.setReturnValue(InteractionResult.PASS);
 		}
