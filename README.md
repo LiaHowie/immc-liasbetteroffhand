@@ -39,7 +39,7 @@ Contributions are more than welcome! Please make this better! If you find anythi
 
 ### Current Contributions
 **[nco2k](https://github.com/nco2k):** 
-- [![v1.2.0](https://img.shields.io/badge/v1.2.0-grey?style=flat-square&logo=github)](https://github.com/LiaHowie/immc-liasbetteroffhand/releases/tag/1.2.0) Added the no offhand light placement optional feature 
-- [![v1.2.0](https://img.shields.io/badge/v1.2.0-grey?style=flat-square&logo=github)](https://github.com/LiaHowie/immc-liasbetteroffhand/releases/tag/1.2.0) Introduced config setting tooltips
-- [![v1.2.0](https://img.shields.io/badge/v1.2.0-grey?style=flat-square&logo=github)](https://github.com/LiaHowie/immc-liasbetteroffhand/releases/tag/1.2.0) Broadened version compatibility to both 26.1.* and 26.2.*
+- [![v1.2.0](https://img.shields.io/badge/v1.2.0-grey?style=flat-square&logo=github)](https://github.com/LiaHowie/IMMC-Lias-Better-Offhand/releases/tag/1.2.0) Added the no offhand light placement optional feature 
+- [![v1.2.0](https://img.shields.io/badge/v1.2.0-grey?style=flat-square&logo=github)](https://github.com/LiaHowie/IMMC-Lias-Better-Offhand/releases/tag/1.2.0) Introduced config setting tooltips
+- [![v1.2.0](https://img.shields.io/badge/v1.2.0-grey?style=flat-square&logo=github)](https://github.com/LiaHowie/IMMC-Lias-Better-Offhand/releases/tag/1.2.0) Broadened version compatibility to both 26.1.* and 26.2.*
 

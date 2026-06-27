@@ -9,8 +9,8 @@
 	],
 	"contact": {
 		"homepage": "https://www.immortalmc.net/",
-		"sources": "https://github.com/LiaHowie/immc-liasbetteroffhand",
-		"issues": "https://github.com/LiaHowie/immc-liasbetteroffhand/issues"
+		"sources": "https://github.com/LiaHowie/IMMC-Lias-Better-Offhand",
+		"issues": "https://github.com/LiaHowie/IMMC-Lias-Better-Offhand/issues"
 	},
 	"license": "GPL-3.0-or-later",
 	"icon": "assets/lias-better-offhand/icon.png",
